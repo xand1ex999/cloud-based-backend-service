@@ -1,28 +1,27 @@
 package com.example.demo.mapper;
 
-import com.example.demo.dto.CreateUserRequest;
+import com.example.demo.dto.RegistrationRequest;
 import com.example.demo.dto.UserResponse;
 import com.example.demo.entity.User;
 
-import java.time.LocalDateTime;
-
 public class UserMapper {
 
-    public static UserResponse toResponse(User user) {
-        UserResponse dto = new UserResponse();
-        dto.setId(user.getId());
-        dto.setEmail(user.getEmail());
-        dto.setCreatedAt(user.getCreatedAt());
-        dto.setActive(user.getActive());
-        return dto;
-    }
+        public static UserResponse toResponse(User user) {
+            UserResponse dto = new UserResponse();
+            dto.setId(user.getId());
+            dto.setEmail(user.getEmail());
+            dto.setName(user.getName());
+            dto.setRole(user.getRole().name());
+            dto.setActive(user.getActive());
+            dto.setCreatedAt(user.getCreatedAt());
+            return dto;
+        }
 
-    public static User toEntity(CreateUserRequest dto, String passwordHash) {
-        User user = new User();
-        user.setEmail(dto.getEmail());
-        user.setPasswordHash(passwordHash);
-        user.setCreatedAt(LocalDateTime.now());
-        user.setActive(true);
-        return user;
-    }
+        public static User toEntity(RegistrationRequest dto) {
+            User user = new User();
+            user.setEmail(dto.getEmail());
+            user.setName(dto.getName());
+            return user;
+        }
+
 }

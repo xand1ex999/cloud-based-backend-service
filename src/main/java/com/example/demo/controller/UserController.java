@@ -1,9 +1,10 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.CreateUserRequest;
+import com.example.demo.dto.RegistrationRequest;
 import com.example.demo.dto.UserResponse;
 import com.example.demo.service.UserService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +18,9 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping
-    public UserResponse createUser(@RequestBody CreateUserRequest request) {
-        return userService.createUser(request);
+    @PostMapping("/auth/register")
+    public UserResponse register(@RequestBody @Valid RegistrationRequest request) {
+        return userService.register(request);
     }
 
     @GetMapping("/{id}")

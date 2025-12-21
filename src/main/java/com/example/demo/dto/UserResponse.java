@@ -14,7 +14,15 @@ import java.time.LocalDateTime;
 public class UserResponse {
     private Long id;
     private String email;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private String name;
+    private String role;
     private Boolean active;
+    private LocalDateTime createdAt;
 }
+
+//
+//reg
+//
+//profile
+//
+//admin endpoints

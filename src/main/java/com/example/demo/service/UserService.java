@@ -1,7 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.CreateUserRequest;
+import com.example.demo.dto.RegistrationRequest;
 import com.example.demo.dto.UserResponse;
+import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.mapper.UserMapper;
@@ -9,7 +10,6 @@ import com.example.demo.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -19,8 +19,11 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserResponse createUser(CreateUserRequest request) {
-        User user = UserMapper.toEntity(request, request.getPassword());
+    public UserResponse register(RegistrationRequest dto) {
+        User user = UserMapper.toEntity(dto);
+        user.setPassword(dto.getPassword());
+        user.setRole(Role.USER);
+        user.setActive(true);
         User savedUser = userRepository.save(user);
         return UserMapper.toResponse(savedUser);
     }
