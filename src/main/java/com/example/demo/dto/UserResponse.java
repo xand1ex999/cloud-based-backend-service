@@ -19,10 +19,3 @@ public class UserResponse {
     private Boolean active;
     private LocalDateTime createdAt;
 }
-
-//
-//reg
-//
-//profile
-//
-//admin endpoints
