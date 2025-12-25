@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.entity.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,12 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 
-@Table(
-    name = "users",
-    uniqueConstraints = {
-            @UniqueConstraint(columnNames = "email")
-    }
-)
+@Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = "email") })
 public class User {
     @Id
     @GeneratedValue

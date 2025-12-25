@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.*;
 import com.example.demo.entity.RefreshToken;
-import com.example.demo.entity.Role;
+import com.example.demo.entity.enums.Role;
 import com.example.demo.entity.User;
 import com.example.demo.exception.InvalidCredentialsException;
 import com.example.demo.exception.UserAlreadyExistsException;
