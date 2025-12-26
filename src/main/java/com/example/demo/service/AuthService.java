@@ -57,20 +57,17 @@ public class AuthService {
     }
 
     public AuthResponse refreshToken(String refreshToken) {
-        RefreshToken tokenEntity = refreshTokenService.findByTokenHash(
-                RefreshTokenService.sha256(refreshToken)
-        ).orElseThrow(() -> new InvalidCredentialsException("Invalid refresh token"));
+        RefreshToken tokenEntity = refreshTokenService.findByTokenHash(RefreshTokenService.sha256(refreshToken))
+                .orElseThrow(() -> new InvalidCredentialsException("Invalid refresh token"));
 
         if (tokenEntity.isRevoked() || tokenEntity.getExpiresAt().isBefore(Instant.now())) {
             throw new InvalidCredentialsException("Refresh token expired or revoked");
         }
 
         User user = tokenEntity.getUser();
-
         String newAccessToken = jwtService.generateAccessToken(user);
-        String newRefreshToken = refreshTokenService.createRefreshToken(user);
 
-        return new AuthResponse(newAccessToken, newRefreshToken);
+        return new AuthResponse(newAccessToken, refreshToken);
     }
 
 }

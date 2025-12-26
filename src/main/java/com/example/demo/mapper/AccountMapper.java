@@ -6,7 +6,8 @@ import com.example.demo.entity.Account;
 
 public class AccountMapper {
 
-    private AccountMapper() {}
+    private AccountMapper() {
+    }
 
     public static AccountResponse toResponse(Account account) {
         AccountResponse dto = new AccountResponse();
