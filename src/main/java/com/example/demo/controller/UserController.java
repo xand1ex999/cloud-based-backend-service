@@ -18,19 +18,19 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    //    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public UserResponse getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
     @GetMapping()
-    //    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<UserResponse> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @DeleteMapping("/{id}")
-    //    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteUserById(@PathVariable Long id) {
         userService.deleteUserById(id);
         return ResponseEntity.ok("User with id " + id + " was deleted successfully");

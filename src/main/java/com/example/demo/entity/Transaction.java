@@ -4,11 +4,19 @@ import com.example.demo.entity.enums.Currency;
 import com.example.demo.entity.enums.TransactionStatus;
 import com.example.demo.entity.enums.TransactionType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 //this is an immutable ledger entry linked to a single account, not a transfer record with "from" and "to" accounts
 @Entity
 @Table(name = "transactions")
