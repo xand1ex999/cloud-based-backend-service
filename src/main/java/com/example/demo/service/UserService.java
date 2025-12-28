@@ -32,7 +32,7 @@ public class UserService {
 
     public void deleteUserById(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " wasn't deleted"));
+                .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
         userRepository.delete(user);
     }
 

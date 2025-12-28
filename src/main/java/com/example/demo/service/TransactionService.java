@@ -31,6 +31,11 @@ public class TransactionService {
 
     @Transactional
     public TransactionResponse createTransaction(TransactionCreateRequest request, CustomUserDetails user) {
+
+        if (request.getAmount().compareTo(BigDecimal.ZERO) <= 0) {
+            throw new RuntimeException("Amount must be positive");
+        }
+
         Account account = accountRepository.findById(request.getAccountId())
                 .orElseThrow(() -> new RuntimeException("Account not found"));
 
@@ -38,9 +43,6 @@ public class TransactionService {
             throw new RuntimeException("Access denied to this account");
         }
 
-        if (request.getAmount().compareTo(BigDecimal.ZERO) <= 0) {
-            throw new RuntimeException("Amount must be positive");
-        }
         // Balance Logic
         if (request.getTransactionType() == TransactionType.DEPOSIT) {
             account.setBalance(account.getBalance().add(request.getAmount()));
@@ -48,7 +50,7 @@ public class TransactionService {
 
         if (request.getTransactionType() == TransactionType.WITHDRAW) {
             if (account.getBalance().compareTo(request.getAmount()) < 0) {
-                throw new RuntimeException("Insufficient funds");
+                throw new RuntimeException("Insufficient balance");
             }
             account.setBalance(account.getBalance().subtract(request.getAmount()));
         }
