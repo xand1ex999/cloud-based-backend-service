@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: cdb-postgres
+    environment:
+      POSTGRES_DB: cdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    image: cloud-backend
+    container_name: cloud-backend
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:

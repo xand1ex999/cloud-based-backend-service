@@ -38,7 +38,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // turning off CSRF for API
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/actuator/**").permitAll()
+                        .requestMatchers("/").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(loginRateLimitFilter, UsernamePasswordAuthenticationFilter.class)
