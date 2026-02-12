@@ -12,7 +12,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   backend:
-    image: cloud-backend
+    build: .
     container_name: cloud-backend
     depends_on:
       - postgres
