@@ -79,6 +79,16 @@ All entities are mapped using JPA/Hibernate with automatic table generation:
 
 ---
 
+## CI/CD Pipeline
+
+This project includes a **GitHub Actions CI/CD pipeline** that automates building, testing, and deployment.
+
+### Pipeline Highlights
+- **Automated Builds:** Docker images for backend and PostgreSQL are built automatically on every push or pull request.  
+- **Automated Testing:** Unit and integration tests run **inside Docker containers** to ensure code correctness before merging.  
+- **Environment Management:** Database credentials and JWT secret are securely stored in **GitHub Secrets**.  
+- **Deployment Ready:** Once tests pass, the pipeline can deploy to staging or production environments (e.g., AWS EC2).
+
 ## AWS Deployment
 
 The service was successfully deployed on AWS EC2:
