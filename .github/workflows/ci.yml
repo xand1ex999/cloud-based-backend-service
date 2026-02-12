@@ -13,6 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+    
       - name: Create .env file
         run: |
           echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
@@ -20,17 +21,18 @@ jobs:
           echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
           echo "DB_URL=jdbc:postgresql://postgres:5432/cdb" >> .env
 
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Build Docker images
+      
+      - name: Build Docker images (with tests)
         run: docker compose build
 
+      
       - name: Start services
         run: docker compose up -d
 
-      - name: Run tests
-        run: docker exec cloud-backend mvn test
-
+      
       - name: Shutdown
         run: docker compose down
